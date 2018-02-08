@@ -119,8 +119,11 @@ public class PlayerController implements Initializable {
             if (wasChanging) {
                 Duration newTime = new Duration(timeSlider.getValue());
                 mediaPlayer.seek(newTime);
-                mediaPlayer.pause();
+                double ms = newTime.toMillis();
+                NumberFormat nf = new DecimalFormat("0.0 ms");
+                currentText.setText(nf.format(ms));
                 
+                mediaPlayer.pause();
                 if (status == Status.PLAYING)
                     mediaPlayer.play();
             }
